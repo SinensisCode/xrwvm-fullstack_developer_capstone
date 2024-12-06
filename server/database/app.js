@@ -16,7 +16,6 @@ const dealerships_data = JSON.parse(
 mongoose.connect("mongodb://0.0.0.0:27017/", { dbName: "dealershipsDB" });
 
 const Reviews = require("./review");
-
 const Dealerships = require("./dealership");
 
 try {

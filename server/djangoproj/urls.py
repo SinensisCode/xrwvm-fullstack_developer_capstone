@@ -18,13 +18,23 @@ from django.urls import path, include
 from django.views.generic import TemplateView
 from django.conf.urls.static import static
 from django.conf import settings
+from djangoapp import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('djangoapp/', include('djangoapp.urls')),
+    path('admin/', admin.site.urls),  # Amministrazione
+    path('djangoapp/', include('djangoapp.urls')),  # Include le rotte dell'app
+
+    # Pagine statiche
     path('', TemplateView.as_view(template_name="Home.html")),
     path('about/', TemplateView.as_view(template_name="About.html")),
     path('contact/', TemplateView.as_view(template_name="Contact.html")),
+
+    # Rotte per React (gestite dal frontend)
     path('login/', TemplateView.as_view(template_name="index.html")),
     path('register/', TemplateView.as_view(template_name="index.html")),
+    path('dealers/', TemplateView.as_view(template_name="index.html")),
+
+    # Rotta dinamica per i dettagli di un dealer
+    path(route='dealer/<int:dealer_id>', view=views.get_dealer_details, name='dealer_details'),
+    
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
