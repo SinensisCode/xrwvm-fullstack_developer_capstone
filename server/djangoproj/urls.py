@@ -36,5 +36,6 @@ urlpatterns = [
 
     # Rotta dinamica per i dettagli di un dealer
     path(route='dealer/<int:dealer_id>', view=views.get_dealer_details, name='dealer_details'),
+    path('get_dealers/', views.get_dealers, name='get_dealers'),
     
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

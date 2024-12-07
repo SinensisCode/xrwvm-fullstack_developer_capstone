@@ -6,14 +6,19 @@ const app = express();
 const port = 3031;
 
 app.use(cors());
+
 app.use(require("body-parser").urlencoded({ extended: false }));
+const path = require("path");
+
+// Serve i file statici dalla cartella 'build' o 'dist'
+app.use(express.static(path.join(__dirname, "build")));
 
 const reviews_data = JSON.parse(fs.readFileSync("data/reviews.json", "utf8"));
 const dealerships_data = JSON.parse(
   fs.readFileSync("data/dealerships.json", "utf8")
 );
 
-mongoose.connect("mongodb://0.0.0.0:27017/", { dbName: "dealershipsDB" });
+mongoose.connect("mongodb://mongo_db:27017/", { dbName: "dealershipsDB" });
 
 const Reviews = require("./review");
 const Dealerships = require("./dealership");
@@ -115,6 +120,8 @@ app.post("/insert_review", express.raw({ type: "*/*" }), async (req, res) => {
 });
 
 // Start the Express server
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+app.listen(port, "0.0.0.0", () => {
+  console.log(
+    `Server is running on http://localhost:${port} or http://192.168.x.x:${port}`
+  );
 });

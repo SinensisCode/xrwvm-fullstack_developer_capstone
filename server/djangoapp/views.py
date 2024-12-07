@@ -88,8 +88,18 @@ def get_dealerships(request, state="All"):
 
 
 def get_dealers(request):
-    return JsonResponse({"status":200,"dealer":dealer})
-
+    try:
+        # Chiamata all'API per recuperare i concessionari
+        dealers = get_request("/fetchDealers")   
+        # Verifica se la risposta è corretta
+        if 'status' in dealers and dealers['status'] == 200:
+            return JsonResponse({"status": 200, "dealers": dealers})
+        else:
+            return JsonResponse({"status": 400, "message": "Unable to fetch dealers"})
+    except Exception as e:
+        logger.error(f"Error fetching dealers: {e}")
+        return JsonResponse({"status": 500, "message": "Internal Server Error"})
+    
 
 # Create a `get_dealer_reviews` view to render the reviews of a dealer
 # def get_dealer_reviews(request,dealer_id):
