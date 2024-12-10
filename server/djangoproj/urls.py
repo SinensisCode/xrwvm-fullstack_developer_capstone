@@ -24,8 +24,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),  # Amministrazione
     path('djangoapp/', include('djangoapp.urls')),  # Include le rotte dell'app
 
-    # Pagine statiche
+    # Rotte per React (gestite dal frontend)
     path('', TemplateView.as_view(template_name="Home.html")),
+
+    # Pagine statiche
     path('about/', TemplateView.as_view(template_name="About.html")),
     path('contact/', TemplateView.as_view(template_name="Contact.html")),
 
@@ -36,6 +38,4 @@ urlpatterns = [
 
     # Rotta dinamica per i dettagli di un dealer
     path(route='dealer/<int:dealer_id>', view=views.get_dealer_details, name='dealer_details'),
-    path('get_dealers/', views.get_dealers, name='get_dealers'),
-    
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
