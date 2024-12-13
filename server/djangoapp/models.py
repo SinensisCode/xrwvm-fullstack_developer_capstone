@@ -15,7 +15,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 class CarMake(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
-   
+    
     # Other fields as needed
 
     def __str__(self):
@@ -37,7 +37,6 @@ class CarModel(models.Model):
         ('SEDAN', 'Sedan'),
         ('SUV', 'SUV'),
         ('WAGON', 'Wagon'),
-        # Add more choices as required
     ]
     type = models.CharField(max_length=10, choices=CAR_TYPES, default='SUV')
     year = models.IntegerField(default=2023,

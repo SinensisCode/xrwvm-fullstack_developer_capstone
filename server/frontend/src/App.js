@@ -12,7 +12,7 @@ function App() {
         {/* Qui definisci la rotta per la home page */}
         <Route path="/" element={<HomePage />} />
         {/* Altri percorsi potrebbero essere aggiunti in seguito */}
-        <Route path="/login" element={<LoginPanel />} />
+    <Route path="/login" element={<LoginPanel />} />
       <Route path="/register" element={<Register />} />
       <Route path="/dealers" element={<Dealers />} />
       <Route path="/dealer/:id" element={<Dealer />} />
